@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d{yyyy-MM-dd HH:mm:ss} [%-5level] %c{1.} %m}{STYLE=logback}%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="co.itstom.sqlite" level="TRACE"/>
+
+        <AsyncRoot level="DEBUG">
+            <AppenderRef ref="stdout"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>
