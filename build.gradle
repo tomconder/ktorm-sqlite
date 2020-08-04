@@ -12,14 +12,14 @@ repositories {
 def ktormVersion = '3.0.0'
 
 dependencies {
-    compile "me.liuwj.ktorm:ktorm-core:${ktormVersion}"
-    compile "me.liuwj.ktorm:ktorm-support-sqlite:${ktormVersion}"
-    compile "org.xerial:sqlite-jdbc:3.32.3.2"
+    implementation "me.liuwj.ktorm:ktorm-core:${ktormVersion}"
+    implementation "me.liuwj.ktorm:ktorm-support-sqlite:${ktormVersion}"
+    implementation "org.xerial:sqlite-jdbc:3.32.3.2"
 
-    compile "org.apache.logging.log4j:log4j-api:2.13.3"
-    compile "org.apache.logging.log4j:log4j-core:2.13.3"
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:2.13.3"
-    compile "com.lmax:disruptor:3.3.6"
+    implementation "org.apache.logging.log4j:log4j-api:2.13.3"
+    implementation "org.apache.logging.log4j:log4j-core:2.13.3"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.13.3"
+    implementation "com.lmax:disruptor:3.3.6"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
