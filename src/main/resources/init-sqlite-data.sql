@@ -1,5 +1,5 @@
-drop table t_department;
-drop table t_employee;
+drop table if exists t_department;
+drop table if exists t_employee;
 
 create table t_department(
   id integer primary key autoincrement,
