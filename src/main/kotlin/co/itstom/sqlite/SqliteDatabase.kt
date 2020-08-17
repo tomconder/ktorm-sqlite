@@ -7,7 +7,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class SqliteDatabase {
-    val logger: Logger = LoggerFactory.getLogger(this.javaClass)
+    private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
     fun connect(): Database {
         // in memory database

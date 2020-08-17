@@ -9,14 +9,16 @@ import org.slf4j.LoggerFactory
 
 val logger: Logger = LoggerFactory.getLogger("Main")
 
+private const val INIT_SCRIPT = "init-sqlite-data.sql"
+
 fun main() {
     val sqliteDatabase = SqliteDatabase()
     val db = sqliteDatabase.connect()
 
-    sqliteDatabase.execSqlScript("init-sqlite-data.sql", db)
+    sqliteDatabase.execSqlScript(INIT_SCRIPT, db)
 
     for (row in db.from(Employee).select()) {
-        logger.info(Integer.toString(row[Employee.id]!!) + " :: " + row[Employee.name])
+        logger.info((row[Employee.id]!!).toString() + " :: " + row[Employee.name])
     }
 
     for (row in db.from(Department).select()) {
