@@ -1,8 +1,8 @@
 package co.itstom.sqlite
 
-import me.liuwj.ktorm.database.Database
-import me.liuwj.ktorm.logging.Slf4jLoggerAdapter
-import me.liuwj.ktorm.support.sqlite.SQLiteDialect
+import org.ktorm.database.Database
+import org.ktorm.logging.Slf4jLoggerAdapter
+import org.ktorm.support.sqlite.SQLiteDialect
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

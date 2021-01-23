@@ -2,8 +2,8 @@ package co.itstom.sqlite
 
 import co.itstom.sqlite.model.Department
 import co.itstom.sqlite.model.Employee
-import me.liuwj.ktorm.dsl.from
-import me.liuwj.ktorm.dsl.select
+import org.ktorm.dsl.from
+import org.ktorm.dsl.select
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

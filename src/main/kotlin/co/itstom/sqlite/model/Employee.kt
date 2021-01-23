@@ -1,6 +1,6 @@
 package co.itstom.sqlite.model
 
-import me.liuwj.ktorm.schema.*
+import org.ktorm.schema.*
 
 object Employee : Table<Nothing>("t_employee") {
     val id = int("id").primaryKey()

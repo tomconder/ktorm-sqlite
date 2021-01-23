@@ -1,8 +1,8 @@
 package co.itstom.sqlite.model
 
-import me.liuwj.ktorm.schema.Table
-import me.liuwj.ktorm.schema.int
-import me.liuwj.ktorm.schema.varchar
+import org.ktorm.schema.Table
+import org.ktorm.schema.int
+import org.ktorm.schema.varchar
 
 object Department : Table<Nothing>("t_department") {
     val id = int("id").primaryKey()
