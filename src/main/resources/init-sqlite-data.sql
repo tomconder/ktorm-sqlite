@@ -2,18 +2,18 @@ drop table if exists t_department;
 drop table if exists t_employee;
 
 create table t_department(
-  id integer primary key autoincrement,
-  name text not null,
-  location text not null
+  id        integer primary key autoincrement,
+  name      text    not null,
+  location  text    not null
 );
 
 create table t_employee(
-  id integer primary key autoincrement,
-  name text not null,
-  job text not null,
-  manager_id integer null,
-  hire_date integer not null,
-  salary integer not null,
+  id            integer primary key autoincrement,
+  name          text    not null,
+  job           text    not null,
+  manager_id    integer null,
+  hire_date     integer not null,
+  salary        integer not null,
   department_id integer not null
 );
 
