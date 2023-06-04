@@ -15,7 +15,7 @@ class SqliteDatabase {
 
         return Database.connect(
             url = "jdbc:sqlite:sample.db",
-            logger = Slf4jLoggerAdapter(logger),
+            logger = Slf4jLoggerAdapter(logger.name),
             dialect = SQLiteDialect()
         )
     }
