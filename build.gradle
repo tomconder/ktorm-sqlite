@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.21'
     id 'application'
 }
 
@@ -11,6 +11,11 @@ repositories {
 }
 
 def ktormVersion = '3.6.0'
+
+kotlin {
+    jvmToolchain(11)
+}
+
 
 dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
