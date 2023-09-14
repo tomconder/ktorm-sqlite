@@ -12,11 +12,6 @@ repositories {
 
 def ktormVersion = '3.6.0'
 
-kotlin {
-    jvmToolchain(11)
-}
-
-
 dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
     implementation 'com.google.guava:guava:32.0.0-jre'
