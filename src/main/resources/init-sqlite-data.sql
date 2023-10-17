@@ -21,11 +21,11 @@ insert into t_department(name, location) values ('Tech', 'Memphis');
 insert into t_department(name, location) values ('Finance', 'Dallas');
 
 insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('vince', 'engineer', null, 1514736000000, 100, 1);
+values ('Vince', 'engineer', null, 1514736000000, 100, 1);
 insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('mary', 'trainee', 1, 1546272000000, 50, 1);
+values ('Mary', 'trainee', 1, 1546272000000, 50, 1);
 
 insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('tom', 'director', null, 1514736000000, 200, 2);
+values ('Tom', 'director', null, 1514736000000, 200, 2);
 insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('penny', 'assistant', 3, 1546272000000, 100, 2);
+values ('Penny', 'assistant', 3, 1546272000000, 100, 2);
