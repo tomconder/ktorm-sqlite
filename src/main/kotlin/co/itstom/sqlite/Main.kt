@@ -18,10 +18,10 @@ fun main() {
     sqliteDatabase.execSqlScript(INIT_SCRIPT, db)
 
     for (row in db.from(Employee).select()) {
-        logger.info((row[Employee.id]!!).toString() + " :: " + row[Employee.name])
+        logger.info("Employee " + (row[Employee.id]!!).toString() + " :: " + row[Employee.name])
     }
 
     for (row in db.from(Department).select()) {
-        logger.info(row[Department.name] + " :: " + row[Department.location])
+        logger.info("Department " + row[Department.name] + " :: " + row[Department.location])
     }
 }

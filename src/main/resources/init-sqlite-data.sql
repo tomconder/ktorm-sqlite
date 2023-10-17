@@ -17,8 +17,8 @@ create table t_employee(
   department_id integer not null
 );
 
-insert into t_department(name, location) values ('tech', 'Guangzhou');
-insert into t_department(name, location) values ('finance', 'Beijing');
+insert into t_department(name, location) values ('Tech', 'Memphis');
+insert into t_department(name, location) values ('Finance', 'Dallas');
 
 insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
 values ('vince', 'engineer', null, 1514736000000, 100, 1);

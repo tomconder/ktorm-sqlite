@@ -15,7 +15,7 @@ def ktormVersion = '3.6.0'
 def log4jVersion = '2.20.0'
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 dependencies {
