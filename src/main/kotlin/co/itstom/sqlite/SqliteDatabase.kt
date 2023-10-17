@@ -2,7 +2,6 @@ package co.itstom.sqlite
 
 import org.ktorm.database.Database
 import org.ktorm.logging.Slf4jLoggerAdapter
-import org.ktorm.support.sqlite.SQLiteDialect
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -15,8 +14,7 @@ class SqliteDatabase {
 
         return Database.connect(
             url = "jdbc:sqlite:sample.db",
-            logger = Slf4jLoggerAdapter(logger.name),
-            dialect = SQLiteDialect()
+            logger = Slf4jLoggerAdapter(logger.name)
         )
     }
 
