@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'co.itstom'
-version '2023.1-SNAPSHOT'
+version '2023.1'
 
 repositories {
     mavenCentral()
