@@ -1,18 +1,18 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
     id 'com.github.ben-manes.versions' version '0.51.0'
     id 'application'
 }
 
 group 'co.itstom'
-version '2023.1'
+version '2024.1'
 
 repositories {
     mavenCentral()
 }
 
 def ktormVersion = '3.6.0'
-def log4jVersion = '2.20.0'
+def log4jVersion = '2.23.1'
 
 kotlin {
     jvmToolchain(21)
@@ -24,7 +24,7 @@ dependencies {
 
     implementation "org.ktorm:ktorm-core:${ktormVersion}"
     implementation "org.ktorm:ktorm-support-sqlite:${ktormVersion}"
-    implementation "org.xerial:sqlite-jdbc:3.45.2.0"
+    implementation "org.xerial:sqlite-jdbc:3.45.3.0"
 
     implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
     implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
