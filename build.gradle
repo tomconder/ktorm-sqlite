@@ -4,8 +4,8 @@ plugins {
     id 'application'
 }
 
-group 'co.itstom'
-version '2024.1'
+group = 'co.itstom'
+version = '2024.1'
 
 repositories {
     mavenCentral()
