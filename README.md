@@ -28,8 +28,8 @@ A Kotlin sample application demonstrating how to use [Ktorm](https://github.com/
 
 ### Prerequisites
 
-* **JDK 25** or later — [Download from Oracle](https://www.oracle.com/java/technologies/downloads/) or use [SDKMAN](https://sdkman.io/)
-* **Gradle** — included via the Gradle wrapper (`./gradlew`), no separate installation needed
+* **JDK 25** or later - use [Adoptium](https://adoptium.net/) or [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
+* **Gradle** - included via the Gradle wrapper (`./gradlew`), no separate installation needed
 
 ### Clone the repository
 
@@ -108,7 +108,7 @@ CREATE TABLE t_employee (
 ```
 
 > \[!NOTE]
-> The initialization script drops and recreates all tables on every run. This is intentional for demonstration purposes — the database is fully reset each time the application starts.
+> The initialization script intentionally drops and recreates all tables on every run. This fully resets the database each time the application starts for demonstration purposes.
 
 ## 📝 License
 
