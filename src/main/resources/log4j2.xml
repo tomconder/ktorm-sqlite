@@ -7,7 +7,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="co.itstom.sqlite" level="TRACE"/>
+        <Logger name="co.itstom.sqlite" level="DEBUG"/>
 
         <AsyncRoot level="DEBUG">
             <AppenderRef ref="stdout"/>
