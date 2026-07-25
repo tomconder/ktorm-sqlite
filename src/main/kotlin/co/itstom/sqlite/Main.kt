@@ -1,9 +1,7 @@
 package co.itstom.sqlite
 
-import co.itstom.sqlite.model.Department
-import co.itstom.sqlite.model.Employee
-import org.ktorm.dsl.from
-import org.ktorm.dsl.select
+import co.itstom.sqlite.model.Employees
+import org.ktorm.entity.sequenceOf
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -17,11 +15,7 @@ fun main() {
 
     sqliteDatabase.execSqlScript(INIT_SCRIPT, db)
 
-    for (row in db.from(Employee).select()) {
-        logger.info("Employee " + (row[Employee.id]!!).toString() + " :: " + row[Employee.name])
-    }
-
-    for (row in db.from(Department).select()) {
-        logger.info("Department " + row[Department.name] + " :: " + row[Department.location])
+    for (e in db.sequenceOf(Employees)) {
+        logger.info("Employee :: ${e.name} | ${e.job} | ${e.department.name} | ${e.department.location} | ${e.hireDate}")
     }
 }
