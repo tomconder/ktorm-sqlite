@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory
 
 class SqliteDatabase {
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
+    private val lineCommentRegex = Regex("--.*")
 
     fun connect(): Database {
         // in memory database
@@ -29,7 +30,7 @@ class SqliteDatabase {
                         // strip line comments before splitting, so a `;` inside one does not cut
                         // a statement in half. A `--` inside a string literal would still be
                         // mistaken for a comment
-                        val script = reader.readText().replace(Regex("--.*"), "")
+                        val script = reader.readText().replace(lineCommentRegex, "")
 
                         for (sql in script.split(';')) {
                             if (sql.any { it.isLetterOrDigit() }) {
