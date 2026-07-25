@@ -15,7 +15,6 @@ create table t_employee(
   id            integer primary key autoincrement,
   name          text    not null,
   job           text    not null,
-  -- reports outlive their manager; they keep working, manager_id just goes null
   manager_id    integer null references t_employee(id) on delete set null,
   hire_date     text    not null,
   salary        integer not null,

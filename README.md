@@ -5,21 +5,21 @@ A Kotlin sample application demonstrating how to use [Ktorm](https://github.com/
 ## ✨ Features
 
 * 🔗 **Ktorm + SQLite integration** - connects Ktorm's idiomatic Kotlin DSL to a local SQLite database file
-* 📋 **Schema definition** - type-safe table and column definitions using Ktorm's `Table` API
+* 📋 **Entity mapping** - `Entity` interfaces bound to type-safe `Table` definitions via Ktorm's `bindTo` API
+* 🧩 **Automatic joins** - `department_id` is mapped with `references`, so reading `employee.department` generates the join
+* 🔐 **Enforced foreign keys** - SQLite leaves foreign keys off per connection; this project turns them on and verifies it at startup
 * 🗃️ **SQL script execution** - loads and runs `.sql` initialization scripts from the classpath at startup
-* 🔍 **Query DSL** - demonstrates fluent, type-safe SELECT queries across multiple tables
 * 📝 **Structured logging** - async logging via Apache Log4j 2 with SLF4J and the LMAX Disruptor
 
 ## 📦 Dependencies
 
 | Library | Version | Purpose |
 |---|---|---|
-| [Kotlin](https://kotlinlang.org/) | 2.3.20 | JVM language |
-| [Ktorm Core](https://www.ktorm.org/) | 4.1.1 | Kotlin ORM framework |
-| [Ktorm SQLite Support](https://www.ktorm.org/en/dialects-and-native-sql.html) | 4.1.1 | SQLite dialect for Ktorm |
-| [SQLite JDBC](https://github.com/xerial/sqlite-jdbc) | 3.51.3.0 | SQLite JDBC driver |
-| [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) | 2.25.4 | Logging framework |
-| [Guava](https://github.com/google/guava) | 33.5.0-jre | Google core Java libraries |
+| [Kotlin](https://kotlinlang.org/) | 2.4.10 | JVM language |
+| [Ktorm Core](https://www.ktorm.org/) | 4.2.1 | Kotlin ORM framework |
+| [Ktorm SQLite Support](https://www.ktorm.org/en/dialects-and-native-sql.html) | 4.2.1 | SQLite dialect for Ktorm |
+| [SQLite JDBC](https://github.com/xerial/sqlite-jdbc) | 3.53.2.1 | SQLite JDBC driver |
+| [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) | 2.26.1 | Logging framework |
 | [LMAX Disruptor](https://lmax-exchange.github.io/disruptor/) | 4.0.0 | High-performance async logging |
 
 > **Java toolchain:** JDK 25 is required to build and run this project.
@@ -54,19 +54,19 @@ cd ktorm-sqlite
 
 This will:
 
-1. Connect to (or create) a local SQLite database file named `sample.db` in the working directory
-2. Execute `init-sqlite-data.sql` from the classpath to drop, recreate, and seed the `t_department` and `t_employee` tables
-3. Query and log all employees and departments to the console
+1. Connect to (or create) a local SQLite database file named `sample.db` in the working directory, with `foreign_keys=on`
+2. Verify that foreign keys are actually enforced, failing fast if they are not
+3. Execute `init-sqlite-data.sql` from the classpath to drop, recreate, and seed the `t_department` and `t_employee` tables
+4. Query every employee and log it with its department, joined automatically through the entity reference
 
 ### Expected output
 
 ```
-INFO  Main - Employee 1 :: Vince
-INFO  Main - Employee 2 :: Mary
-INFO  Main - Employee 3 :: Tom
-INFO  Main - Employee 4 :: Penny
-INFO  Main - Department Tech :: Memphis
-INFO  Main - Department Finance :: Dallas
+INFO  Main - Employee :: Vince | Engineer | Tech | Memphis | 2021-01-02
+INFO  Main - Employee :: Sandy | Trainee | Tech | Memphis | 2022-03-04
+INFO  Main - Employee :: Tom | Director | Finance | Dallas | 2023-05-06
+INFO  Main - Employee :: Penny | Assistant | Finance | Dallas | 2024-06-07
+INFO  Main - Employee :: Peggy | Sales Rep | Sales | Tampa | 2026-07-08
 ```
 
 ## 🗂️ Project Structure
@@ -78,8 +78,8 @@ src/
     │   ├── Main.kt               # Application entry point
     │   ├── SqliteDatabase.kt     # Database connection and SQL script runner
     │   └── model/
-    │       ├── Department.kt     # Ktorm table definition for t_department
-    │       └── Employee.kt       # Ktorm table definition for t_employee
+    │       ├── Department.kt     # Department entity and t_department table
+    │       └── Employee.kt       # Employee entity and t_employee table
     └── resources/
         ├── init-sqlite-data.sql  # Schema creation and seed data
         └── log4j2.xml            # Log4j 2 configuration
@@ -88,6 +88,12 @@ src/
 ## 🗄️ Database Schema
 
 ```sql
+-- Teardown, with foreign keys off so a half-built database still drops
+PRAGMA foreign_keys = OFF;
+DROP TABLE IF EXISTS t_employee;
+DROP TABLE IF EXISTS t_department;
+PRAGMA foreign_keys = ON;
+
 -- Departments
 CREATE TABLE t_department (
     id       INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -100,15 +106,20 @@ CREATE TABLE t_employee (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     name          TEXT    NOT NULL,
     job           TEXT    NOT NULL,
-    manager_id    INTEGER NULL,
-    hire_date     INTEGER NOT NULL,
+    manager_id    INTEGER NULL     REFERENCES t_employee(id)   ON DELETE SET NULL,
+    hire_date     TEXT    NOT NULL,
     salary        INTEGER NOT NULL,
-    department_id INTEGER NOT NULL
+    department_id INTEGER NOT NULL REFERENCES t_department(id) ON DELETE CASCADE
 );
 ```
 
+The two delete rules differ on purpose. An employee cannot exist without a department, so deleting a department deletes its employees. An employee without a manager is a normal state, so deleting a manager leaves the reports in place with `manager_id` set to null.
+
 > \[!NOTE]
-> The initialization script intentionally drops and recreates all tables on every run. This fully resets the database each time the application starts for demonstration purposes.
+> `hire_date` is stored as ISO-8601 text, not as integer milliseconds. Integers are read back through `java.sql.Date`, which converts using the JVM's local time zone and can shift the date by a day.
+
+> \[!NOTE]
+> The initialization script intentionally drops and recreates all tables on every run. This fully resets the database each time the application starts for demonstration purposes. The teardown runs with foreign keys disabled so that a database left half-built by a failed run can still be dropped.
 
 ## 📝 License
 
