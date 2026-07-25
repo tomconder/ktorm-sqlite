@@ -106,14 +106,13 @@ CREATE TABLE t_employee (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     name          TEXT    NOT NULL,
     job           TEXT    NOT NULL,
-    manager_id    INTEGER NULL     REFERENCES t_employee(id)   ON DELETE SET NULL,
     hire_date     TEXT    NOT NULL,
     salary        INTEGER NOT NULL,
     department_id INTEGER NOT NULL REFERENCES t_department(id) ON DELETE CASCADE
 );
 ```
 
-The two delete rules differ on purpose. An employee cannot exist without a department, so deleting a department deletes its employees. An employee without a manager is a normal state, so deleting a manager leaves the reports in place with `manager_id` set to null.
+An employee cannot exist without a department, so deleting a department deletes its employees.
 
 > \[!NOTE]
 > `hire_date` is stored as ISO-8601 text, not as integer milliseconds. Integers are read back through `java.sql.Date`, which converts using the JVM's local time zone and can shift the date by a day.

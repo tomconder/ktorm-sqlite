@@ -15,7 +15,6 @@ create table t_employee(
   id            integer primary key autoincrement,
   name          text    not null,
   job           text    not null,
-  manager_id    integer null references t_employee(id) on delete set null,
   hire_date     text    not null,
   salary        integer not null,
   department_id integer not null references t_department(id) on delete cascade
@@ -25,15 +24,15 @@ insert into t_department(name, location) values ('Tech', 'Memphis');
 insert into t_department(name, location) values ('Finance', 'Dallas');
 insert into t_department(name, location) values ('Sales', 'Tampa');
 
-insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('Vince', 'Engineer', null, '2021-01-02', 100, 1);
-insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('Sandy', 'Trainee', 1, '2022-03-04', 50, 1);
+insert into t_employee(name, job, hire_date, salary, department_id)
+values ('Vince', 'Engineer', '2021-01-02', 100, 1);
+insert into t_employee(name, job, hire_date, salary, department_id)
+values ('Sandy', 'Trainee', '2022-03-04', 50, 1);
 
-insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('Tom', 'Director', null, '2023-05-06', 400, 2);
-insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('Penny', 'Assistant', 3, '2024-06-07', 100, 2);
+insert into t_employee(name, job, hire_date, salary, department_id)
+values ('Tom', 'Director', '2023-05-06', 400, 2);
+insert into t_employee(name, job, hire_date, salary, department_id)
+values ('Penny', 'Assistant', '2024-06-07', 100, 2);
 
-insert into t_employee(name, job, manager_id, hire_date, salary, department_id)
-values ('Peggy', 'Sales Rep', 3, '2026-07-08', 100, 3);
+insert into t_employee(name, job, hire_date, salary, department_id)
+values ('Peggy', 'Sales Rep', '2026-07-08', 100, 3);
