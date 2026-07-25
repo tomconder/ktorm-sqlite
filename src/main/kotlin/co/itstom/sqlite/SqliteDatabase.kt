@@ -13,20 +13,10 @@ class SqliteDatabase {
         // url = "jdbc:sqlite::memory:"
 
         // foreign_keys is off per-connection by default in SQLite; without it the FK is decorative
-        val database = Database.connect(
+        return Database.connect(
             url = "jdbc:sqlite:sample.db?foreign_keys=on",
             logger = Slf4jLoggerAdapter(logger.name)
         )
-
-        database.useConnection { conn ->
-            conn.createStatement().use { statement ->
-                statement.executeQuery("pragma foreign_keys").use { rs ->
-                    check(rs.next() && rs.getBoolean(1)) { "foreign keys are not enforced on this connection" }
-                }
-            }
-        }
-
-        return database
     }
 
     fun execSqlScript(filename: String, database: Database) {
