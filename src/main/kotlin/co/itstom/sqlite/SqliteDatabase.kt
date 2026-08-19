@@ -1,12 +1,8 @@
 package co.itstom.sqlite
 
 import org.ktorm.database.Database
-import org.ktorm.logging.Slf4jLoggerAdapter
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 class SqliteDatabase {
-    private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
     private val lineCommentRegex = Regex("--.*")
 
     fun connect(): Database {
@@ -14,10 +10,8 @@ class SqliteDatabase {
         // url = "jdbc:sqlite::memory:"
 
         // foreign_keys is off per-connection by default in SQLite; without it the FK is decorative
-        return Database.connect(
-            url = "jdbc:sqlite:sample.db?foreign_keys=on",
-            logger = Slf4jLoggerAdapter(logger.name)
-        )
+        // logger omitted: Ktorm auto-detects the SLF4J binding on the classpath
+        return Database.connect(url = "jdbc:sqlite:sample.db?foreign_keys=on")
     }
 
     fun execSqlScript(filename: String, database: Database) {
