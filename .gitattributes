@@ -1,5 +1,10 @@
 #
 # https://help.github.com/articles/dealing-with-line-endings/
 #
+# Normalize to LF in the repo and in the working tree, matching .editorconfig
+* text=auto eol=lf
+
 # These are explicitly windows files and should use crlf
 *.bat           text eol=crlf
+
+*.jar           binary
