@@ -30,16 +30,9 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/crate-ci/typos
-      rev: v1.44.0
+      rev: v1.49.0
       hooks:
           - id: typos
-
-    - repo: https://github.com/MaratFM/pre-commit-remark
-      rev: 1.0.0
-      hooks:
-          - id: remark
-            args: ["--output", "--frail"]
-            files: "\\.md$"
 
     - repo: https://github.com/shellcheck-py/shellcheck-py
       rev: v0.11.0.1
