@@ -72,8 +72,7 @@ internal fun splitSqlStatements(script: String): List<String> {
     val current = StringBuilder()
     var i = 0
     while (i < script.length) {
-        val c = script[i]
-        when (c) {
+        when (val c = script[i]) {
             '-' if script.getOrNull(i + 1) == '-' -> i = endOfLineComment(script, i)
             '/' if script.getOrNull(i + 1) == '*' -> i = endOfBlockComment(script, i + 2)
             '\'', '"', '`' -> i = current.appendQuoted(script, c, i + 1)
